@@ -6,160 +6,184 @@
   <title>Smart Shopping — доставка из аутлетов</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #ffffff;
-      --muted: #f6f7f9;
-      --text: #0f172a;
-      --subtext: #475569;
-      --accent-orange: #f97316;
-      --accent-green: #22c55e;
-      --accent-blue: #0ea5e9;
-      --radius: 18px;
-      --shadow: 0 8px 20px rgba(2,6,23,0.08);
+    :root{
+      --bg:#fff;--muted:#f6f7f9;--text:#0f172a;--subtext:#475569;
+      --border:#e5e7eb;--orange:#f97316;--orange-600:#ea580c;
+      --green:#22c55e;--teal:#14b8a6;--teal-600:#0d9488;
+      --blue:#0ea5e9;--shadow:0 10px 30px rgba(2,6,23,.08);--r:18px
     }
-    * { box-sizing:border-box; margin:0; padding:0; }
-    body { font-family:"Inter",sans-serif; background:var(--bg); color:var(--text); line-height:1.5; }
-    .container { max-width:1120px; margin:0 auto; padding:0 20px; }
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:var(--bg);line-height:1.5}
+    .container{max-width:1120px;margin:0 auto;padding:0 20px}
 
-    header { position:sticky; top:0; background:rgba(255,255,255,.9); backdrop-filter:blur(6px); border-bottom:1px solid #e5e7eb; z-index:50; }
-    .nav { display:flex; justify-content:space-between; align-items:center; height:64px; }
-    .brand { font-weight:800; font-size:20px; display:flex; align-items:center; gap:8px; }
-    .badge { font-size:12px; font-weight:700; background:var(--accent-green); color:#fff; padding:4px 8px; border-radius:999px; }
+    /* header */
+    header{position:sticky;top:0;background:rgba(255,255,255,.9);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);z-index:30}
+    .nav{display:flex;justify-content:space-between;align-items:center;height:70px}
+    .brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:20px}
+    .badge{background:var(--green);color:#fff;font-weight:700;font-size:12px;padding:4px 8px;border-radius:999px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 20px;border-radius:12px;font-weight:600;border:0;cursor:pointer;text-decoration:none;transition:.2s}
+    .btn--teal{background:var(--teal);color:#fff}.btn--teal:hover{background:var(--teal-600)}
+    .btn--primary{background:var(--orange);color:#fff}.btn--primary:hover{background:var(--orange-600)}
+    .slogan{color:#64748b;font-size:14px}
 
-    .btn { display:inline-flex; align-items:center; justify-content:center; border-radius:14px; padding:14px 22px; font-weight:600; cursor:pointer; text-decoration:none; transition:.2s ease; }
-    .btn--primary { background:var(--accent-orange); color:#fff; }
-    .btn--primary:hover { background:#ea580c; }
-    .btn--teal { background:#14b8a6; color:#fff; }
-    .btn--teal:hover { background:#0d9488; }
+    /* hero */
+    .hero{padding:64px 0;text-align:center;background:linear-gradient(180deg,#fff,#f8fafc)}
+    .hero h1{font-size:clamp(28px,5vw,48px);margin:0 0 16px}
+    .hero p{color:var(--subtext);font-size:18px;max-width:720px;margin:0 auto 24px}
+    .hero .cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+    .hero img{width:100%;height:auto;border-radius:var(--r);box-shadow:var(--shadow);margin-top:24px}
 
-    .hero { text-align:center; padding:80px 20px 40px; background:linear-gradient(180deg,#fff,#f8fafc); }
-    .hero h1 { font-size:clamp(28px,5vw,48px); margin-bottom:16px; }
-    .hero p { color:var(--subtext); font-size:18px; max-width:720px; margin:0 auto 28px; }
-    .hero img { max-width:100%; height:auto; border-radius:var(--radius); box-shadow:var(--shadow); margin-top:24px; }
-    .btn-row { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+    /* how it works */
+    .how{background:#fff;padding:64px 0}
+    .section-title{font-size:clamp(24px,4vw,36px);text-align:center;margin:0 0 22px}
+    .steps{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+    .step{background:var(--muted);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
+    .step svg{width:28px;height:28px;margin-bottom:8px}
+    .step strong{display:block;margin-bottom:6px}
 
-    .how { background:#fff; padding:64px 20px; }
-    .steps { display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); }
-    .step { background:var(--muted); border-radius:var(--radius); padding:20px; box-shadow:var(--shadow); }
-    .step svg { width:28px; height:28px; margin-bottom:10px; }
-    .step strong { display:block; margin-bottom:6px; }
+    /* gallery */
+    .gallery{background:var(--muted);padding:64px 0}
+    .cards{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .card{background:#fff;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+    .card img{width:100%;height:340px;object-fit:cover;display:block}
+    .meta{padding:14px 16px;display:flex;justify-content:space-between;font-size:15px}
+    .price{color:var(--green);font-weight:700}
 
-    .gallery { background:var(--muted); padding:64px 20px; }
-    .section-title { font-size:clamp(24px,4vw,36px); text-align:center; margin-bottom:24px; }
-    .cards { display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
-    .card { background:#fff; border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; }
-    .card img { width:100%; height:340px; object-fit:cover; display:block; }
-    .meta { padding:14px 16px; display:flex; justify-content:space-between; font-size:15px; }
-    .price { color:var(--accent-green); font-weight:700; }
+    /* advantages */
+    .advantages{background:#fff;padding:64px 0}
+    .adv-cards{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+    .adv-card{display:flex;gap:14px;background:var(--muted);border-radius:var(--r);padding:20px;align-items:flex-start;box-shadow:var(--shadow)}
+    .adv-card svg{width:28px;height:28px;flex-shrink:0}
+    .adv-card strong{display:block;margin-bottom:6px}
 
-    .advantages { background:#fff; padding:64px 20px; }
-    .adv-cards { display:grid; gap:24px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); }
-    .adv-card { display:flex; gap:14px; background:var(--muted); border-radius:var(--radius); padding:20px; align-items:flex-start; box-shadow:var(--shadow); }
-    .adv-card svg { width:28px; height:28px; flex-shrink:0; }
-    .adv-card strong { display:block; margin-bottom:6px; }
+    /* bottom cta */
+    .cta-section{text-align:center;padding:72px 0;background:#f8fafc}
+    .cta-section h2{font-size:clamp(26px,4vw,38px);margin:0 0 14px}
+    .cta-section p{color:var(--subtext);margin:0 0 22px}
 
-    .cta-section { text-align:center; padding:80px 20px; background:#f8fafc; }
-    .cta-section h2 { font-size:clamp(26px,4vw,38px); margin-bottom:14px; }
-    .cta-section p { color:var(--subtext); margin-bottom:24px; }
+    footer{text-align:center;padding:30px 0;color:#64748b;font-size:14px}
 
-    footer { text-align:center; padding:30px 20px; font-size:14px; color:#64748b; }
-
-    /* Мобильные карточки */
-    @media (max-width: 640px) {
-      .card img { height:220px; object-fit:cover; }
+    /* mobile fixes */
+    @media (max-width:640px){
+      .nav{flex-direction:column;align-items:flex-start;gap:6px;height:auto;padding:10px 0}
+      .brand{font-size:18px}
+      .header-cta{display:flex;flex-direction:column;width:100%;gap:8px}
+      .header-cta .btn{width:100%;font-size:15px;padding:12px 0}
+      .hero h1{font-size:26px}
+      .hero p{font-size:16px}
+      .card img{height:220px}       /* аккуратные «витринные» карточки на телефоне */
     }
   </style>
 </head>
 <body>
 
-<header>
-  <div class="container nav">
-    <div class="brand">Smart Shopping <span class="badge">Москва</span></div>
-    <a href="https://t.me/your_channel" class="btn btn--teal">Смотреть находки в Telegram</a>
-  </div>
-</header>
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <div class="brand">Smart Shopping <span class="badge">Москва</span></div>
+      <div class="header-cta">
+        <small class="slogan">Брендовые вещи из аутлетов с доставкой за 2 часа</small>
+        <a class="btn btn--teal" href="https://t.me/your_channel">Смотреть находки в Telegram</a>
+      </div>
+    </div>
+  </header>
 
-<section class="hero">
-  <h1>Брендовые вещи из аутлетов с доставкой за 2 часа</h1>
-  <p>Мы находим выгодные вещи в OffPrice, Familia и других аутлетах, подтверждаем фото и чеками и привозим в тот же день. Экономия времени и до 70% от розницы.</p>
-  <div class="btn-row">
-    <a href="https://t.me/your_channel" class="btn btn--teal">Перейти в Telegram и заказать</a>
-    <a href="#gallery" class="btn btn--primary">Смотреть примеры цен</a>
-  </div>
-  <img src="5.png" alt="Hero фото — жёлтая куртка">
-</section>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>Доставка лучших находок из аутлетов Москвы</h1>
+      <p>Мы находим выгодные вещи в OffPrice, Familia и других аутлетах, подтверждаем фото и чеками и привозим в тот же день. Экономия времени и до 70% от розницы.</p>
+      <div class="cta">
+        <a class="btn btn--teal" href="https://t.me/your_channel">Перейти в Telegram и заказать</a>
+        <a class="btn btn--primary" href="#gallery">Смотреть примеры цен</a>
+      </div>
+      <!-- ✅ твой реальный файл -->
+      <img src="5.png" alt="Жёлтая куртка — витрина аутлета">
+    </div>
+  </section>
 
-<section class="how">
-  <h2 class="section-title">Как это работает</h2>
-  <div class="steps">
-    <div class="step">
-      <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2"><path d="M4 4h16v12H5l-1 4V4z"/></svg>
-      <strong>Запрос</strong> Напишите бренд, размер, бюджет — или просто задачу.
+  <!-- How it works -->
+  <section class="how">
+    <div class="container">
+      <h2 class="section-title">Как это работает</h2>
+      <div class="steps">
+        <div class="step">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M4 4h16v12H5l-1 4V4z"/></svg>
+          <strong>Запрос</strong> Пишите бренд, размер, бюджет — или просто задачу.
+        </div>
+        <div class="step">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <strong>Поиск и фото</strong> Находим варианты, присылаем фото/видео с ценниками.
+        </div>
+        <div class="step">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><path d="M3 14h7v7H3z"/></svg>
+          <strong>Оплата по QR</strong> Как в магазине — чек отправим сразу.
+        </div>
+        <div class="step">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M10 17h5V7H3v10h2"/><circle cx="7.5" cy="17.5" r="2"/></svg>
+          <strong>Доставка</strong> Курьер привозит за 2 часа. Примерка возможна.
+        </div>
+      </div>
     </div>
-    <div class="step">
-      <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-orange)" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-      <strong>Поиск и фото</strong> Находим варианты в аутлетах, присылаем фото/видео.
-    </div>
-    <div class="step">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#14b8a6" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><path d="M3 14h7v7H3z"/></svg>
-      <strong>Оплата по QR</strong> Оплачиваете по QR, чек получаете сразу.
-    </div>
-    <div class="step">
-      <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2"><path d="M10 17h5V7H3v10h2"/><circle cx="7.5" cy="17.5" r="2"/></svg>
-      <strong>Доставка</strong> Курьер привозит за 2 часа, примерка и возврат возможны.
-    </div>
-  </div>
-</section>
+  </section>
 
-<section class="gallery" id="gallery">
-  <h2 class="section-title">Примеры реальных цен из аутлетов</h2>
-  <div class="cards">
-    <div class="card">
-      <img src="1.png" alt="Levi’s джинсы">
-      <div class="meta"><span>Levi’s джинсы</span><span class="price">от 2999 ₽</span></div>
+  <!-- Gallery -->
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <h2 class="section-title">Примеры реальных цен из аутлетов</h2>
+      <div class="cards">
+        <article class="card">
+          <img src="1.png" alt="Levi’s джинсы">
+          <div class="meta"><span>Levi’s джинсы</span><span class="price">от 2 999 ₽</span></div>
+        </article>
+        <article class="card">
+          <img src="2.png" alt="GAP худи">
+          <div class="meta"><span>GAP худи</span><span class="price">от 2 499 ₽</span></div>
+        </article>
+        <article class="card">
+          <img src="3.png" alt="Puma футболка">
+          <div class="meta"><span>Puma футболка</span><span class="price">от 1 999 ₽</span></div>
+        </article>
+      </div>
     </div>
-    <div class="card">
-      <img src="2.png" alt="GAP худи">
-      <div class="meta"><span>GAP худи</span><span class="price">от 2499 ₽</span></div>
-    </div>
-    <div class="card">
-      <img src="3.png" alt="Puma футболка">
-      <div class="meta"><span>Puma футболка</span><span class="price">от 1999 ₽</span></div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section class="advantages">
-  <h2 class="section-title">Почему это выгодно</h2>
-  <div class="adv-cards">
-    <div class="adv-card">
-      <svg fill="none" stroke="var(--accent-green)" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16v12H5l-1 4V4z"/></svg>
-      <div><strong>Экономия времени</strong> Шопер сделает всё за вас.</div>
+  <!-- Advantages -->
+  <section class="advantages">
+    <div class="container">
+      <h2 class="section-title">Почему это выгодно</h2>
+      <div class="adv-cards">
+        <div class="adv-card">
+          <svg fill="none" stroke="var(--green)" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16v12H5l-1 4V4z"/></svg>
+          <div><strong>Экономия времени</strong> Шопер сделает всё за вас.</div>
+        </div>
+        <div class="adv-card">
+          <svg fill="none" stroke="var(--orange)" stroke-width="2" viewBox="0 0 24 24"><path d="M4 7h16v10H4z"/></svg>
+          <div><strong>Оплата как в магазине</strong> Цены и чек — магазинные.</div>
+        </div>
+        <div class="adv-card">
+          <svg fill="none" stroke="var(--green)" stroke-width="2" viewBox="0 0 24 24"><path d="M3 10h18l-1.5 9a2 2 0 0 1-2 2H6.5a2 2 0 0 1-2-1.7L3 10Z"/></svg>
+          <div><strong>Доставка от 500 ₽</strong> Быстро и прозрачно по Москве.</div>
+        </div>
+        <div class="adv-card">
+          <svg fill="none" stroke="var(--blue)" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l9 9-9 9-9-9z"/></svg>
+          <div><strong>Никакого риска</strong> Возврат по правилам магазина.</div>
+        </div>
+      </div>
     </div>
-    <div class="adv-card">
-      <svg fill="none" stroke="var(--accent-orange)" stroke-width="2" viewBox="0 0 24 24"><path d="M4 7h16v10H4z"/></svg>
-      <div><strong>Оплата как в магазине</strong> Цены и чек — магазинные.</div>
-    </div>
-    <div class="adv-card">
-      <svg fill="none" stroke="var(--accent-green)" stroke-width="2" viewBox="0 0 24 24"><path d="M3 10h18l-1.5 9a2 2 0 0 1-2 2H6.5a2 2 0 0 1-2-1.7L3 10Z"/></svg>
-      <div><strong>Доставка от 500 ₽</strong> Быстро и прозрачно по Москве.</div>
-    </div>
-    <div class="adv-card">
-      <svg fill="none" stroke="var(--accent-blue)" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l9 9-9 9-9-9z"/></svg>
-      <div><strong>Никакого риска</strong> Возврат по правилам магазина.</div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section class="cta-section">
-  <h2>Готовы найти свою идеальную вещь?</h2>
-  <p>Перейдите в Telegram — покажем свежие находки и оформим заказ за 1–2 минуты.</p>
-  <a href="https://t.me/your_channel" class="btn btn--teal">Перейти в Telegram и сделать заказ</a>
-</section>
+  <!-- Final CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Готовы найти свою идеальную вещь?</h2>
+      <p>Перейдите в Telegram — покажем свежие находки и оформим заказ за 1–2 минуты.</p>
+      <a class="btn btn--teal" href="https://t.me/your_channel">Перейти в Telegram и сделать заказ</a>
+    </div>
+  </section>
 
-<footer>
-  © 2025 Smart Shopping · <a href="https://t.me/your_channel" style="color:#14b8a6; text-decoration:none;">Мы в Telegram</a>
-</footer>
+  <footer>
+    © 2025 Smart Shopping · <a href="https://t.me/your_channel" style="color:var(--teal);text-decoration:none;font-weight:600">Мы в Telegram</a>
+  </footer>
 
 </body>
 </html>
